@@ -1,26 +1,23 @@
 package com.example.machinetest.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-
-
-@Entity
-public class Products {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductResponseDTO {
     private int id;
     private String name;
     private String description;
     private int price;
     private int quantity;
     private String imageUrl;
+    private String categoryName;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name ="category_id")
-    @JsonBackReference
-    private Category category;
+    public ProductResponseDTO(int id, String name, String description, int price, int quantity, String imageUrl, String categoryName){
+        this.id=id;
+        this.name=name;
+        this.description=description;
+        this.price=price;
+        this.quantity=quantity;
+        this.imageUrl=imageUrl;
+        this.categoryName=categoryName;
+    }
 
     public int getId() {
         return id;
@@ -70,24 +67,11 @@ public class Products {
         this.imageUrl = imageUrl;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "Products{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", category=" + category +
-                '}';
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }
